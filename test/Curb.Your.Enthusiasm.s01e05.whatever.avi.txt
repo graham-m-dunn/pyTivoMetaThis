@@ -1,0 +1,21 @@
+vWriter : Larry David
+isEpisode : true
+vActor : Cheryl Hines
+vActor : Jeff Garlin
+vActor : Larry David
+vGuestStar : Diane Keaton
+vGuestStar : Kris Mcgaha
+vGuestStar : Rose Abdoo
+vGuestStar : Jack Gallagher
+vGuestStar : Karen Maruyama
+vGuestStar : Oscar Nunez
+vGuestStar : Lisa Ann Walter
+vGuestStar : Marissa Jaret Winokur
+vGuestStar : Nia Vardalos
+vDirector : Andy Ackerman
+originalAirDate : 2000-11-12T00:00:00Z
+title : Interior Decorator
+episodeNumber : 5
+seriesTitle : Curb Your Enthusiasm
+seriesId : SH391978
+description : Larry has some medical problems involving a certain bracelet. No biggy. Then larger problems arise when Larry finds out he shares the same interior decorator as Diane Keaton.

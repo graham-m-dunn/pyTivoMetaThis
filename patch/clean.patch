@@ -1,0 +1,42 @@
+--- pyTivoMetaThisTip.py	2008-03-05 19:51:04.000000000 -0600
++++ pyTivoMetaThis12.py	2008-03-05 19:50:32.000000000 -0600
+@@ -301,7 +301,37 @@
+                 match = os.path.splitext(filename)[0]
+                 if match is None:
+                     continue
+-                title = re.sub('[\\._]', ' ', match)
++		# in some cases I was getting the subdir name on there,
++		# so let's just strip it off
++                title = re.sub(options.filedir, '', match)
++		# strip a variety of common junk from torrented avi filenames
++		# these first are case-sensitive
++                title = re.sub('crowbone', '', title)
++                title = re.sub('joox-dot-net', '', title)
++                title = re.sub('DOMiNiON', '', title)
++                title = re.sub('LiMiTED', '', title)
++                title = re.sub('aXXo', '', title)
++                title = re.sub('DoNE', '', title)
++                title = re.sub('ViTE', '', title)
++                title = re.sub('BaLD', '', title)
++                title = re.sub('leetay', '', title)
++                title = re.sub('\.AC3', '', title)
++                title = re.sub('\[Eng\]', '', title)
++                title = re.sub('\[AC3\]', '', title)
++		# this gets rid of the bracketed year
++                title = re.sub('\[\d\d\d\d\]', '', title)
++		# now lower-case it for some general stuff
++                title = string.lower(title)
++		# periods and dashes become spaces
++                title = re.sub('[\\._-]', ' ', title)
++                title = re.sub('swesub', '', title)
++                title = re.sub('dvdrip', '', title)
++                title = re.sub('dvdscr', '', title)
++                title = re.sub('xvid', '', title)
++                title = re.sub('divx', '', title)
++		# clear out space runs
++                title = re.sub('  ', ' ', title)
++                title = re.sub('  ', ' ', title)
+             else:
+                 match = re.search('(.*).[Ss](\d\d)[Ee](\d\d).*', filename)
+                 if match is None:
+

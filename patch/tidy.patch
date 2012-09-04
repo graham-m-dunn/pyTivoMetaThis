@@ -1,0 +1,20 @@
+--- pyTivoMetaThis.orig	2008-03-05 21:50:20.000000000 -0500
++++ pyTivoMetaThis.py	2008-03-05 22:53:40.000000000 -0500
+@@ -318,11 +318,11 @@
+                     if err.errno == errno.EEXIST:
+                         if os.path.isdir(METADIR):
+                             if (options.debug): print "directory already exists"
+-                            else:
+-                                if (options.debug): print "file already exists, but not a directory"
+-                                raise # re-raise the exception
+-			else:
+-                                raise
++                        else:
++                            if (options.debug): print "file already exists, but not a directory"
++                            raise # re-raise the exception
++		    else:
++                        raise
+ 
+ 		metadataFileName = os.path.join(METADIR, filename + ".txt")
+             else:
+

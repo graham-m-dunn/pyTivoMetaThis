@@ -1,0 +1,48 @@
+create table series( id INTEGER PRIMARY KEY, Actors UNICODE, Airs_DayOfWeek UNICODE, Airs_Time UNICODE, FirstAired UNICODE, Genre UNICODE, IMDB_ID STRING, Language UNICODE, Network UNICODE, Overview UNICODE, Rating FLOAT, Runtime FLOAT, SeriesID INTEGER, SeriesName UNICODE, Status UNICODE, lastupdated INTEGER, zap2it_id STRING);
+Series:
+id : int (index)
+Actors: unicode
+Airs_DayOfWeek : unicode
+Airs_Time : unicode
+FirstAired : unicode
+Genre : unicode
+IMDB_ID : string
+Language : unicode
+Network : unicode
+Overview : unicode
+Rating : float
+Runtime : float
+SeriesID : int
+SeriesName : unicode
+Status : unicode
+lastupdated : int
+zap2it_id : string
+
+
+create table episode(id INTEGER PRIMARY KEY, DVD_chapter INTEGER, DVD_discid INTEGER, DVD_episodenumber INTEGER,  DVD_season INTEGER, Director UNICODE, EpisodeName UNICODE, EpisodeNumber INTEGER, FirstAired STRING,  GuestStars UNICODE, IMDB_ID STRING, Language UNICODE, Overview UNICODE, ProductionCode STRING, Rating FLOAT, SeasonNumber INTEGER, Writer UNICODE,  absolute_number INTEGER, airsafter_season INTEGER,  airsbefore_episode INTEGER, airsbefore_season INTEGER, filename UNICODE, lastupdated INTEGER, seasonid INTEGER, seriesid INTEGER);
+Episode:
+    <id> int (index)
+    <DVD_chapter> int 
+    <DVD_discid> int 
+    <DVD_episodenumber> int 
+    <DVD_season> int 
+    <Director> unicode
+    <EpisodeName> unicode
+    <EpisodeNumber> int
+    <FirstAired> string
+    <GuestStars> unicode
+    <IMDB_ID> string
+    <Language> unicode
+    <Overview> unicode
+    <ProductionCode> string
+    <Rating> float
+    <SeasonNumber> int
+    <Writer> unicode
+    <absolute_number> int
+    <airsafter_season> int
+    <airsbefore_episode> int
+    <airsbefore_season> int
+    <filename> unicode
+    <lastupdated> int
+    <seasonid> int
+    <seriesid> int (Series.id)

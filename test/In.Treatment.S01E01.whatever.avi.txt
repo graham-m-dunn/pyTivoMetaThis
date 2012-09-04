@@ -1,0 +1,11 @@
+isEpisode : true
+vActor : Gabriel Byrne
+vGuestStar : Melissa George
+vDirector : Rodrigo Garcia
+vDirector : Christopher Misiano
+originalAirDate : 2008-01-28T00:00:00Z
+title : Laura - Week One
+episodeNumber : 1
+seriesTitle : In Treatment
+seriesId : SH1009634
+description : Paul learns that Laura is infatuated with him when she attends her regular Monday appointment. Paul, however, is further shocked by the revelations Laura makes regarding a seamy bar encounter. 

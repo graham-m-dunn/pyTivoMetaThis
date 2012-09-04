@@ -1,0 +1,111 @@
+--- ../pyTivoMetaThis.py	2008-03-14 20:07:39.000000000 -0700
++++ pyTivoMetaThis.py	2008-03-21 18:15:44.000000000 -0700
+@@ -131,7 +131,7 @@
+ 	zap2it_id = seriesURLXML[0].findtext('zap2it_id')
+ 	if (options.debug): print "Zap2It ID: " + zap2it_id	
+ 
+-	return seriesid, zap2it_id
++	return seriesURLXML, seriesid
+ 
+ def getEpisodeInfoXML(MirrorURL, seriesid, season, episode):
+ 	# Takes a seriesid, season number, episode number and return xml data`
+@@ -145,33 +145,15 @@
+             print episodeInfoXML
+ 	return episodeInfoXML
+ 
+-def formatEpisodeData(e, title, zap2it_id, f):
+-    # Takes a list e of XML elements, the series title, the Zap2It ID (aka the Tivo groupID), and a filename f
++def formatEpisodeData(e, f):
++    # Takes a dict e of XML elements, the series title, the Zap2It ID (aka the Tivo groupID), and a filename f
+     # TODO : Split up multiple guest stars / writers / etc. Split on '|'. (http://trac.kurai.org/trac.cgi/ticket/2)
+     # This is weak. Should just detect if EpisodeNumber exists.
+     if (options.debug) : print "In formatEpisodeData\n"
+     isE = "true"
+     metadataText = []
+-    
+-    title1 = Element("seriesTitle")
+-    title1.text = title
+-    e.append(title1)
+-    
+-    title2 = Element("title")
+-    title2.text = title
+-    e.append(title2)	    
+-
+-    zap2it = Element("zap2it_id")
+-    zap2it.text = zap2it_id
+-    e.append(zap2it)
+-    
+-    isEpisode = Element("isEpisode")
+-    if (isE == "true" ):
+-        isEpisode.text = "true"
+-    else:
+-        isEpisode.text = "false"
+-    e.append(isEpisode)
+ 
++    e["isEpisode"] = isE
+ 
+     # The following is a dictionary of thetvdb xml elements and how they map to the Tivo's metadata attributes. Note that there
+     # are Tivo metadata with no corresponding thetvdb xml; those are the lines where the LHS and RHS are identical. Those are
+@@ -180,7 +162,7 @@
+         # As seen on http://pytivo.armooo.net/wiki/MetaData
+         'time' : 'time',
+         'FirstAired' : 'originalAirDate', 
+-        'seriesTitle' : 'seriesTitle',
++        'SeriesName' : 'seriesTitle',
+         'EpisodeName' : 'title',
+         'Overview' : 'description',
+         'isEpisode' : 'isEpisode',
+@@ -195,12 +177,13 @@
+         'tvRating' : 'tvRating',
+         'vProgramGenre' : 'vProgramGenre',
+         'vSeriesGenre' : 'vSeriesGenre',
++        'Actors' : 'vActor',
+         'GuestStars' : 'vGuestStar',
+         'Director' : 'vDirector',
+         'ExecProducer' : 'vExecProducer',
+         'Writer' : 'vWriter',
+         'Host' : 'vHost',
+-        'Choreographer' : 'vChoreographer'
++        'Choreographer' : 'vChoreographer',
+         }
+ 
+     # These are thetvdb xml elements that have no corresponding Tivo metadata attribute. Maybe someday.
+@@ -224,14 +207,14 @@
+     
+     
+     
+-    for node in e:
++    for (tag, text) in e.iteritems():
+         line = ""
+         safeline = ""
+ 
+-        if (node.tag == "FirstAired" and (node.text)):
+-            node.text = datetime(*strptime(node.text, "%Y-%m-%d")[0:6]).strftime("%Y-%m-%dT%H:%M:%SZ")
+-        if (pyTivoMetadata.get(node.tag) and (node.text)) :
+-            line = pyTivoMetadata.get(node.tag)  + " : " + re.sub('\n', ' ', node.text) + "\n"
++        if (tag == "FirstAired" and (text)):
++            text = datetime(*strptime(text, "%Y-%m-%d")[0:6]).strftime("%Y-%m-%dT%H:%M:%SZ")
++        if (pyTivoMetadata.get(tag) and (text)) :
++            line = pyTivoMetadata.get(tag)  + " : " + re.sub('\n', ' ', text) + "\n"
+             if (options.debug): print ">" + line + "<"
+             for char in line:
+                 if char in string.printable: safeline = safeline + char # Never know what you're going to get back from the Internet.
+@@ -420,11 +403,15 @@
+ 				formatMovieData(title, metadataFileName)
+ 			else:
+ 				if (options.debug): print "Series: " + series + "season: " + season + "Episode: " + episode
+-				(seriesid, zap2it_id) = getSeriesId(MirrorURL, series)
++                                episodeInfo = {}
++				(seriesInfoXML, seriesid) = getSeriesId(MirrorURL, series)
++                                for node in seriesInfoXML.getiterator():
++                                    episodeInfo[node.tag] = node.text
+ 				episodeInfoXML = getEpisodeInfoXML(MirrorURL, seriesid, season, episode)
+-				episodeInfoList =  [node for node in episodeInfoXML.getiterator()]
++                                for node in episodeInfoXML.getiterator():
++                                    episodeInfo[node.tag] = node.text
+                  
+-				formatEpisodeData(episodeInfoList, series, zap2it_id, metadataFileName)
++				formatEpisodeData(episodeInfo, metadataFileName)
+ 
+ if __name__ == "__main__":
+ 		    main()

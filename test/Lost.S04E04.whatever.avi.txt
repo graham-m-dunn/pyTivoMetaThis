@@ -1,0 +1,31 @@
+vWriter : Elizabeth Sarnoff
+vWriter : Greggory Nations
+isEpisode : true
+vActor : Malcolm David Kelley
+vActor : Jorge Garcia
+vActor : Maggie Grace
+vActor : Josh Holloway
+vActor : Yunjin Kim
+vActor : Evangeline Lilly
+vActor : Daniel Dae Kim
+vActor : Ian Somerhalder
+vActor : Harold Perrineau Jr.
+vActor : Terry O'Quinn
+vActor : Emilie de Ravin
+vActor : Matthew Fox
+vActor : Dominic Monaghan
+vActor : Naveen Andrews
+vActor : Michelle Rodriguez
+vGuestStar : Tania Kahale
+vGuestStar : Traber Burns
+vGuestStar : Susan Gibney
+vGuestStar : Fred Q. Collins
+vGuestStar : William Blanchette
+vGuestStar : Shawn Doyle
+vDirector : Stephen Williams
+originalAirDate : 2008-02-21T00:00:00Z
+title : Eggtown
+episodeNumber : 4
+seriesTitle : Lost
+seriesId : SH672362
+description : Kate needs to get information out of the hostages, but it may jeopardize her standing with Locke -- as well as with Sawyer. Meanwhile in the future Kate's Court hearings take place.

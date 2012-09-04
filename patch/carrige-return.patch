@@ -1,0 +1,11 @@
+--- pyTivoMetaThis.orig	2008-02-25 19:40:06.000000000 -0500
++++ pyTivoMetaThis.py	2008-02-29 18:15:04.000000000 -0500
+@@ -206,7 +206,7 @@
+ 		if (node.tag == "FirstAired"):
+ 			node.text = datetime(*strptime(node.text, "%Y-%m-%d")[0:6]).strftime("%Y-%m-%dT%H:%M:%SZ")
+ 		if (pyTivoMetadata.get(node.tag) and (node.text)) :
+-			line = re.sub('\n','', pyTivoMetadata.get(node.tag))  + " : " + node.text + "\n"
++			line = pyTivoMetadata.get(node.tag)  + " : " + re.sub('\n', ' ', node.text) + "\n"
+ 			if (options.debug): print ">" + line + "<"
+ 			for char in line:
+ 					if char in string.printable: safeline = safeline + char # Never know what you're going to get back from the Internet.
